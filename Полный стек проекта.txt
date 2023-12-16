@@ -1,0 +1,5 @@
+React, Next.js app router, FSD архитектура, postgresql, prisma,  zod,
+@tanstack/react-query, react-hook-form,  tailwindcss, shadcn/ui,
+next-auth, jest , @testing-library/react, playwright
+
+https://www.youtube.com/watch?v=nsGusxzitoc&t=1019s
