@@ -7,7 +7,7 @@ import { compact } from 'lodash-es'
 import { privateConfig } from '@/shared/config/private'
 
 // const value = useSession()
-// value.data?.user
+// value.data?.user.
 
 export const nextAuthConfig: AuthOptions = {
 	adapter: PrismaAdapter(dbClient) as AuthOptions['adapter'], // https://authjs.dev/reference/adapter/prisma?_gl=1*1m9sfhn*_gcl_au*MTk3ODI0MzIwOS4xNzA1NzQ4NDM1LjQ0MjIxMzA2Ni4xNzA2MDc5NjEzLjE3MDYwNzk3Mjg.#:~:text=prisma%20%2D%2Dsave%2Ddev-,PrismaAdapter,-()%E2%80%8B
