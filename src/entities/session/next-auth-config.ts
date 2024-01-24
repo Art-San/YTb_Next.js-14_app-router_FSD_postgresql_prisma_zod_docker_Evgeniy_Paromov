@@ -1,13 +1,24 @@
 import { AuthOptions } from 'next-auth'
+import { useSession } from 'next-auth/react'
 import GithubProvider from 'next-auth/providers/github'
+import { PrismaAdapter } from '@auth/prisma-adapter'
+import { dbClient } from '@/shared/lib/db'
+import { compact } from 'lodash-es'
+import { privateConfig } from '@/shared/config/private'
+
+// const value = useSession()
+// value.data?.user
 
 export const nextAuthConfig: AuthOptions = {
-	providers: [
-		GithubProvider({
-			clientId: process.env.GITHUB_ID,
-			clientSecret: process.env.GITHUB_SECRET,
-		}),
-	],
+	adapter: PrismaAdapter(dbClient) as AuthOptions['adapter'], // https://authjs.dev/reference/adapter/prisma?_gl=1*1m9sfhn*_gcl_au*MTk3ODI0MzIwOS4xNzA1NzQ4NDM1LjQ0MjIxMzA2Ni4xNzA2MDc5NjEzLjE3MDYwNzk3Mjg.#:~:text=prisma%20%2D%2Dsave%2Ddev-,PrismaAdapter,-()%E2%80%8B
+	providers: compact([
+		privateConfig.GITHUB_ID &&
+			privateConfig.GITHUB_SECRET &&
+			GithubProvider({
+				clientId: process.env.GITHUB_ID ?? '',
+				clientSecret: process.env.GITHUB_SECRET || '',
+			}),
+	]),
 }
 
 // import { AuthOptions } from "next-auth";
