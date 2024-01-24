@@ -1,49 +1,74 @@
-import { Button } from '@/shared/ui/button'
+'use client'
 import {
-	Sheet,
-	SheetTrigger,
-	SheetContent,
-	SheetHeader,
-} from '@/shared/ui/sheet'
-import { Menu } from 'lucide-react'
+	DropdownMenu,
+	DropdownMenuContent,
+	DropdownMenuGroup,
+	DropdownMenuItem,
+	DropdownMenuLabel,
+	DropdownMenuSeparator,
+	DropdownMenuTrigger,
+} from '@/shared/ui/dropdown-menu'
 
-export function Layout({
-	logo,
-	nav,
-	profile,
-	actions,
-}: {
-	logo?: React.ReactNode
-	nav?: React.ReactNode
-	profile?: React.ReactNode
-	actions?: React.ReactNode
-}) {
+import { LogOut, User } from 'lucide-react'
+import { Button } from '@/shared/ui/button'
+import Link from 'next/link'
+import { Avatar, AvatarFallback } from '@/shared/ui/avatar'
+
+// import { useAppSession } from '@/entities/user/session'
+// import { useSignOut } from '@/features/auth/use-sign-out'
+// import { SignInButton } from '@/features/auth/sign-in-button'
+// import { ProfileAvatar, getProfileDisplayName } from '@/entities/user/profile'
+
+export function Profile() {
+	// const session = useAppSession()
+	// const { signOut, isPending: isLoadingSignOut } = useSignOut()
+
+	// if (session.status === 'loading') {
+	// 	return <Skeleton className="w-8 h-8 rounded-full" />
+	// }
+
+	// if (session.status === 'unauthenticated') {
+	// 	return <SignInButton />
+	// }
+
+	// const user = session?.data?.user
+
 	return (
-		<header className="sticky top-0 z-50 w-full border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
-			<div className="container flex h-14 items-center">
-				<div className="md:hidden mr-2">
-					<Sheet>
-						<SheetTrigger asChild>
-							<Button variant="ghost" size="icon">
-								<Menu className="h-5 w-5" />
-							</Button>
-						</SheetTrigger>
-						<SheetContent side="left">
-							<SheetHeader className=" border-b pb-5 mb-5">{logo}</SheetHeader>
-							{nav}
-						</SheetContent>
-					</Sheet>
-				</div>
-
-				<div className="mr-4 hidden md:flex mr-4">{logo}</div>
-				<div className="items-center flex-1 flex">
-					<div className="hidden md:flex">{nav}</div>
-					<div className="flex flex-1 items-center justify-end space-x-3 ">
-						{actions}
-						{profile}
-					</div>
-				</div>
-			</div>
-		</header>
+		<DropdownMenu>
+			<DropdownMenuTrigger asChild>
+				<Button
+					variant="ghost"
+					className="p-px rounded-full self-center h-8 w-8"
+				>
+					<Avatar>
+						<AvatarFallback>AV</AvatarFallback>
+					</Avatar>
+				</Button>
+			</DropdownMenuTrigger>
+			<DropdownMenuContent className="w-56 mr-2 ">
+				<DropdownMenuLabel>
+					<p>Мой аккаунт</p>
+					<p className="text-xs text-muted-foreground overflow-hidden text-ellipsis">
+						Paromov
+						{/* {user ? getProfileDisplayName(user) : undefined} */}
+					</p>
+				</DropdownMenuLabel>
+				<DropdownMenuGroup></DropdownMenuGroup>
+				<DropdownMenuSeparator />
+				<DropdownMenuGroup>
+					<DropdownMenuItem asChild>
+						<Link href={`/profile/1`}>
+							<User className="mr-2 h-4 w-4" />
+							<span>Профиль</span>
+						</Link>
+					</DropdownMenuItem>
+					<DropdownMenuItem>
+						{/* <DropdownMenuItem onClick={() => signOut()}> */}
+						<LogOut className="mr-2 h-4 w-4" />
+						<span>Выход</span>
+					</DropdownMenuItem>
+				</DropdownMenuGroup>
+			</DropdownMenuContent>
+		</DropdownMenu>
 	)
 }

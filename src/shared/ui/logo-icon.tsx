@@ -1,3 +1,4 @@
+// https://icones.js.org/
 export function LogoIcon(props: React.SVGProps<SVGSVGElement>) {
 	return (
 		<svg
