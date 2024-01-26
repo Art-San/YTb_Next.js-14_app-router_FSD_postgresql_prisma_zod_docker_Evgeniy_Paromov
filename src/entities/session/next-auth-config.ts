@@ -12,6 +12,11 @@ import { privateConfig } from '@/shared/config/private'
 
 export const nextAuthConfig: AuthOptions = {
 	adapter: PrismaAdapter(dbClient) as AuthOptions['adapter'], // https://authjs.dev/reference/adapter/prisma?_gl=1*1m9sfhn*_gcl_au*MTk3ODI0MzIwOS4xNzA1NzQ4NDM1LjQ0MjIxMzA2Ni4xNzA2MDc5NjEzLjE3MDYwNzk3Mjg.#:~:text=prisma%20%2D%2Dsave%2Ddev-,PrismaAdapter,-()%E2%80%8B
+	pages: {
+		signIn: '/auth/sign-in',
+		newUser: '/auth/new-user',
+		verifyRequest: '/auth/verify-request',
+	},
 	providers: compact([
 		EmailProvider({
 			// self-signed certificate in certificate chain -- самоподписанный сертификат в цепочке сертификатов
@@ -33,22 +38,6 @@ export const nextAuthConfig: AuthOptions = {
 			}),
 	]),
 }
-
-// import NextAuth from 'next-auth';
-// import Providers from 'next-auth/providers';
-
-// export default NextAuth({
-// 	// ... другие настройки ...
-// 	providers: [
-// 		Providers.Email({
-// 			// ... другие настройки ...
-// 			server: {
-// 				// ... другие настройки ...
-// 				agent: false, // Отключить использование агента SSL
-// 			},
-// 		}),
-// 	],
-// });
 
 // import { AuthOptions } from "next-auth";
 // import GithubProvider from "next-auth/providers/github";

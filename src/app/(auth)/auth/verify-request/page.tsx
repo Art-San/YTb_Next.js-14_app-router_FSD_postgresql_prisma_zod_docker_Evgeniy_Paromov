@@ -1,7 +1,3 @@
-import { FC } from 'react'
-
-const VerifyRequestPage: FC = () => {
-	return <div>VerifyRequestPage</div>
+export default function VerifyRequest() {
+	return <div className=" container py-10">VerifyRequest</div>
 }
-
-export default VerifyRequestPage

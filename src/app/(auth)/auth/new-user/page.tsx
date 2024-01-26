@@ -1,7 +1,3 @@
-import { FC } from 'react'
-
-const NewUserPage: FC = () => {
-	return <div>NewUserPage</div>
+export default function NewUser() {
+	return <div className=" container py-10">New User</div>
 }
-
-export default NewUserPage
