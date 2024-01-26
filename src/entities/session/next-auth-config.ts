@@ -1,6 +1,7 @@
 import { AuthOptions } from 'next-auth'
 import { useSession } from 'next-auth/react'
 import GithubProvider from 'next-auth/providers/github'
+import EmailProvider from 'next-auth/providers/email'
 import { PrismaAdapter } from '@auth/prisma-adapter'
 import { dbClient } from '@/shared/lib/db'
 import { compact } from 'lodash-es'
@@ -12,6 +13,18 @@ import { privateConfig } from '@/shared/config/private'
 export const nextAuthConfig: AuthOptions = {
 	adapter: PrismaAdapter(dbClient) as AuthOptions['adapter'], // https://authjs.dev/reference/adapter/prisma?_gl=1*1m9sfhn*_gcl_au*MTk3ODI0MzIwOS4xNzA1NzQ4NDM1LjQ0MjIxMzA2Ni4xNzA2MDc5NjEzLjE3MDYwNzk3Mjg.#:~:text=prisma%20%2D%2Dsave%2Ddev-,PrismaAdapter,-()%E2%80%8B
 	providers: compact([
+		EmailProvider({
+			// self-signed certificate in certificate chain -- самоподписанный сертификат в цепочке сертификатов
+			server: {
+				host: privateConfig.EMAIL_SERVER_HOST,
+				port: privateConfig.EMAIL_SERVER_PORT,
+				auth: {
+					user: privateConfig.EMAIL_SERVER_USER,
+					pass: privateConfig.EMAIL_SERVER_PASSWORD,
+				},
+			},
+			from: privateConfig.EMAIL_FROM,
+		}),
 		privateConfig.GITHUB_ID &&
 			privateConfig.GITHUB_SECRET &&
 			GithubProvider({
@@ -20,6 +33,22 @@ export const nextAuthConfig: AuthOptions = {
 			}),
 	]),
 }
+
+// import NextAuth from 'next-auth';
+// import Providers from 'next-auth/providers';
+
+// export default NextAuth({
+// 	// ... другие настройки ...
+// 	providers: [
+// 		Providers.Email({
+// 			// ... другие настройки ...
+// 			server: {
+// 				// ... другие настройки ...
+// 				agent: false, // Отключить использование агента SSL
+// 			},
+// 		}),
+// 	],
+// });
 
 // import { AuthOptions } from "next-auth";
 // import GithubProvider from "next-auth/providers/github";
