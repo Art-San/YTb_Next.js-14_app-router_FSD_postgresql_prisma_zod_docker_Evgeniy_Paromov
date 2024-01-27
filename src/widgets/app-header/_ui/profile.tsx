@@ -17,7 +17,7 @@ import { Avatar, AvatarFallback, AvatarImage } from '@/shared/ui/avatar'
 import { useSignOut } from '@/features/auth/use-sign-out'
 import { SignInButton } from '@/features/auth/sign-in-button'
 // import { ProfileAvatar, getProfileDisplayName } from '@/entities/user/profile'
-import { useAppSession } from '@/entities/session/use-app-session'
+import { useAppSession } from '@/entities/user/use-app-session'
 import { Skeleton } from '@/shared/ui/skeleton'
 
 export function Profile() {
