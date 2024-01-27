@@ -1,9 +1,9 @@
 import { dbClient } from '@/shared/lib/db'
-import { UserEntity, UserId } from '../_domain/types'
+import { UserEntity } from '../_domain/types'
 
 export class UserRepository {
-	async createUser(user: UserEntity) {
-		await dbClient.user.create({
+	async createUser(user: UserEntity): Promise<UserEntity> {
+		return await dbClient.user.create({
 			data: user,
 		})
 	}

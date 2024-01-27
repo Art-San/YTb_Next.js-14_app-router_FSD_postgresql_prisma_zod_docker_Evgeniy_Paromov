@@ -6,12 +6,19 @@ import { PrismaAdapter } from '@auth/prisma-adapter'
 import { dbClient } from '@/shared/lib/db'
 import { compact } from 'lodash-es'
 import { privateConfig } from '@/shared/config/private'
+import { createUserUseCase } from './_use-cases/create-user'
 
-// const value = useSession()
-// value.data?.user.
+const prismaAdapter = PrismaAdapter(dbClient)
 
 export const nextAuthConfig: AuthOptions = {
-	adapter: PrismaAdapter(dbClient) as AuthOptions['adapter'], // https://authjs.dev/reference/adapter/prisma?_gl=1*1m9sfhn*_gcl_au*MTk3ODI0MzIwOS4xNzA1NzQ4NDM1LjQ0MjIxMzA2Ni4xNzA2MDc5NjEzLjE3MDYwNzk3Mjg.#:~:text=prisma%20%2D%2Dsave%2Ddev-,PrismaAdapter,-()%E2%80%8B
+	adapter: {
+		// отвечает за создание Юзера
+		...prismaAdapter,
+		createUser: (user) => {
+			return createUserUseCase.exec(user)
+		},
+	} as AuthOptions['adapter'],
+	// 2:36:00
 	pages: {
 		signIn: '/auth/sign-in',
 		newUser: '/auth/new-user',
@@ -19,7 +26,6 @@ export const nextAuthConfig: AuthOptions = {
 	},
 	providers: compact([
 		EmailProvider({
-			// self-signed certificate in certificate chain -- самоподписанный сертификат в цепочке сертификатов
 			server: {
 				host: privateConfig.EMAIL_SERVER_HOST,
 				port: privateConfig.EMAIL_SERVER_PORT,

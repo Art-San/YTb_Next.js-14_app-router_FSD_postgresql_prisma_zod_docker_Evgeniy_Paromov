@@ -9,7 +9,7 @@ export const ROLES: Record<Role, Role> = {
 export type UserEntity = {
 	id: UserId
 	email: string
-	role: Role
+	role?: Role | null
 	emailVerified?: Date | null
 	name?: string | null
 	image?: string | null
