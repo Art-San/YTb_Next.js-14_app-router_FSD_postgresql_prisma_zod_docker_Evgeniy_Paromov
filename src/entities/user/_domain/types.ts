@@ -19,7 +19,7 @@ export type SessionEntity = {
 	user: {
 		id: UserId
 		email: string
-		role: Role
+		role?: Role | null
 		name?: string | null
 		image?: string | null
 	}

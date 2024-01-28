@@ -1,7 +1,7 @@
 import { z } from 'zod'
 
 const privateConfigSchema = z.object({
-	// ADMIN_EMAILS: z.string().optional(),
+	ADMINS_EMAILS: z.string().optional(),
 	// TEST_EMAIL_TOKEN: z.string().optional(),
 
 	GITHUB_ID: z.string().optional(),

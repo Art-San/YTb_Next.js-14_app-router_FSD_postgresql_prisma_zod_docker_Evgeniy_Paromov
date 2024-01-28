@@ -15,10 +15,24 @@ export const nextAuthConfig: AuthOptions = {
 		// отвечает за создание Юзера
 		...prismaAdapter,
 		createUser: (user) => {
+			// перехват создания пользователя
 			return createUserUseCase.exec(user)
 		},
 	} as AuthOptions['adapter'],
 	// 2:36:00
+	callbacks: {
+		// этот callbacks управляет созданием session
+		session: async ({ session, user }) => {
+			return {
+				...session,
+				user: {
+					...session.user,
+					id: user.id,
+					role: user.role,
+				},
+			}
+		},
+	},
 	pages: {
 		signIn: '/auth/sign-in',
 		newUser: '/auth/new-user',

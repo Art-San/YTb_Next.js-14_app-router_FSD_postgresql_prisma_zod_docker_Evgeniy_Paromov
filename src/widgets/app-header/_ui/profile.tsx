@@ -17,13 +17,14 @@ import { Avatar, AvatarFallback, AvatarImage } from '@/shared/ui/avatar'
 import { useSignOut } from '@/features/auth/use-sign-out'
 import { SignInButton } from '@/features/auth/sign-in-button'
 // import { ProfileAvatar, getProfileDisplayName } from '@/entities/user/profile'
-import { useAppSession } from '@/entities/user/use-app-session'
+
 import { Skeleton } from '@/shared/ui/skeleton'
+import { useAppSession, useRole } from '@/entities/user/session.client'
 
 export function Profile() {
 	const session = useAppSession()
 	const { signOut, isPending: isLoadingSignOut } = useSignOut()
-
+	console.log('Profile session', useRole())
 	if (session.status === 'loading') {
 		return <Skeleton className="w-8 h-8 rounded-full" />
 	}
@@ -42,7 +43,7 @@ export function Profile() {
 					className="p-px rounded-full self-center h-8 w-8"
 				>
 					<Avatar>
-						<AvatarImage src={session.data?.user.image} />
+						<AvatarImage src={session?.data?.user?.image ?? undefined} />
 						<AvatarFallback>AV</AvatarFallback>
 					</Avatar>
 				</Button>
@@ -51,7 +52,7 @@ export function Profile() {
 				<DropdownMenuLabel>
 					<p>Мой аккаунт</p>
 					<p className="text-xs text-muted-foreground overflow-hidden text-ellipsis">
-						{session.data?.user.name}
+						{session?.data?.user?.name}
 						{/* {user ? getProfileDisplayName(user) : undefined} */}
 					</p>
 				</DropdownMenuLabel>
