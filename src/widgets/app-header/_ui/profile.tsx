@@ -12,14 +12,16 @@ import {
 import { LogOut, User } from 'lucide-react'
 import { Button } from '@/shared/ui/button'
 import Link from 'next/link'
-import { Avatar, AvatarFallback, AvatarImage } from '@/shared/ui/avatar'
 
 import { useSignOut } from '@/features/auth/use-sign-out'
 import { SignInButton } from '@/features/auth/sign-in-button'
 // import { ProfileAvatar, getProfileDisplayName } from '@/entities/user/profile'
 
 import { Skeleton } from '@/shared/ui/skeleton'
-import { useAppSession, useRole } from '@/entities/user/session.client'
+
+import { ProfileAvatar, getProfileDisplayName } from '@/entities/user/profile'
+import { useAppSession } from '@/entities/user/_vm/use-app-session'
+import { useRole } from '@/entities/user/_vm/use-role'
 
 export function Profile() {
 	const session = useAppSession()
@@ -42,18 +44,19 @@ export function Profile() {
 					variant="ghost"
 					className="p-px rounded-full self-center h-8 w-8"
 				>
-					<Avatar>
+					<ProfileAvatar profile={user} className="h-8 w-8" />
+					{/* <Avatar>
 						<AvatarImage src={session?.data?.user?.image ?? undefined} />
 						<AvatarFallback>AV</AvatarFallback>
-					</Avatar>
+					</Avatar> */}
 				</Button>
 			</DropdownMenuTrigger>
 			<DropdownMenuContent className="w-56 mr-2 ">
 				<DropdownMenuLabel>
 					<p>Мой аккаунт</p>
 					<p className="text-xs text-muted-foreground overflow-hidden text-ellipsis">
-						{session?.data?.user?.name}
-						{/* {user ? getProfileDisplayName(user) : undefined} */}
+						{user ? getProfileDisplayName(user) : undefined}
+						{/* {session?.data?.user?.name} */}
 					</p>
 				</DropdownMenuLabel>
 				<DropdownMenuGroup></DropdownMenuGroup>

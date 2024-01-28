@@ -28,8 +28,8 @@ export type SessionEntity = {
 
 // Projetions
 
-// export type Profile = {
-//   email: string;
-//   name?: string | null;
-//   image?: string | null;
-// };
+export type Profile = {
+	email: string
+	name?: string | null
+	image?: string | null
+}
