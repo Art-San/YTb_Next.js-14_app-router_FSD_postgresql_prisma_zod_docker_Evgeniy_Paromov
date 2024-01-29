@@ -10,7 +10,6 @@ export default function ProfilePage({ params }: { params: { id: string } }) {
 					Это как другие пользователи видят вас на сайте
 				</p>
 			</div>
-			<h1>Профиль</h1>
 			<Separator />
 
 			<UpdateProfileForm userId={params.id} />

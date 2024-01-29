@@ -16,7 +16,7 @@ import {
 import { Input } from '@/shared/ui/input'
 import { Spinner } from '@/shared/ui/spinner'
 import { AvatarField } from './avatar-field'
-// import { Profile } from "@/entities/user/profile";
+import { Profile } from '@/entities/user/profile'
 // import { UserId } from "@/entities/user/user";
 // import { useUpdateProfile } from "../_vm/use-update-profile";
 
@@ -41,20 +41,24 @@ type ProfileFormValues = z.infer<typeof profileFormSchema>
 // })
 
 export function ProfileForm({
-	// onSuccess,
-	// profile,
+	onSuccess,
+	profile,
 	// userId,
 	submitText = 'Сохранить',
 }: {
 	// userId: UserId
-	// profile: Profile
+	profile: Profile
 	onSuccess?: () => void
 	submitText?: string
 }) {
 	const form = useForm<ProfileFormValues>({
 		resolver: zodResolver(profileFormSchema),
+		defaultValues: {
+			email: profile.email,
+			image: profile.image ?? undefined,
+			name: profile.name ?? '',
+		},
 	})
-	console.log('form', form)
 
 	return (
 		<Form {...form}>

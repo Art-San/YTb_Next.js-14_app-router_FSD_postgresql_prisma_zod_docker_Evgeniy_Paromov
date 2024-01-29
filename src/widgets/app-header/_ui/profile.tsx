@@ -37,6 +37,8 @@ export function Profile() {
 
 	const user = session?.data?.user
 
+	console.log('user', user)
+
 	return (
 		<DropdownMenu>
 			<DropdownMenuTrigger asChild>
@@ -63,7 +65,7 @@ export function Profile() {
 				<DropdownMenuSeparator />
 				<DropdownMenuGroup>
 					<DropdownMenuItem asChild>
-						<Link href={`/profile/1`}>
+						<Link href={`/profile/${user?.id}`}>
 							<User className="mr-2 h-4 w-4" />
 							<span>Профиль</span>
 						</Link>

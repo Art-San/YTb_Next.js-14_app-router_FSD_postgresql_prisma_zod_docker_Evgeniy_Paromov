@@ -24,8 +24,8 @@ export const getUserProfileAction = async (
 		userId,
 	})
 
-	return resultSchema.parseAsync(user)
-	// return resultSchema.parseAsync({
-	// 	profile: user,
-	// })
+	return resultSchema.parseAsync({
+		profile: user,
+	})
+	// return resultSchema.parseAsync(user)
 }
