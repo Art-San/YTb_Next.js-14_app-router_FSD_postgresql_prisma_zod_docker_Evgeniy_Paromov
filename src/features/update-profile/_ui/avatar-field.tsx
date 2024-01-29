@@ -5,6 +5,7 @@ import { Spinner } from '@/shared/ui/spinner'
 import { ProfileAvatar } from '@/entities/user/profile'
 // import { useUploadAvatar } from "../_vm/use-upload-avatar";
 
+// 5:03:20
 export function AvatarField({
 	value,
 	onChange,

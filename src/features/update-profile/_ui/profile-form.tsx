@@ -17,9 +17,9 @@ import { Input } from '@/shared/ui/input'
 import { Spinner } from '@/shared/ui/spinner'
 import { AvatarField } from './avatar-field'
 import { Profile } from '@/entities/user/profile'
-import { useUpdateProfileMutation } from '../_queries'
+
 import { UserId } from '@/entities/user/user'
-// import { useUpdateProfile } from "../_vm/use-update-profile";
+import { useUpdateProfile } from '../_vm/use-update-profile'
 
 const profileFormSchema = z.object({
 	name: z
@@ -57,10 +57,10 @@ export function ProfileForm({
 		defaultValues: getDefaultValues(profile),
 	})
 
-	const updateProfileMutation = useUpdateProfileMutation()
+	const updateProfile = useUpdateProfile()
 
 	const handleSubmit = form.handleSubmit(async (data) => {
-		const newProfile = await updateProfileMutation.mutateAsync({
+		const newProfile = await updateProfile.update({
 			userId,
 			data,
 		})
@@ -114,7 +114,7 @@ export function ProfileForm({
 					)}
 				/>
 				<Button type="submit">
-					{false && (
+					{updateProfile.isPending && (
 						<Spinner
 							className="mr-2 h-4 w-4 animate-spin"
 							aria-label="Обновление профиля"
