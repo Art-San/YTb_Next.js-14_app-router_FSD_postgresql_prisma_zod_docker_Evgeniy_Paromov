@@ -1,5 +1,4 @@
 // 4:00:00
-
 import { UserId } from '../_domain/types'
 import { getUserProfileAction } from '../_actions/get-user-profile'
 import { useQueryClient } from '@tanstack/react-query'
@@ -11,6 +10,7 @@ export const getProfileQuery = (userId: UserId) => ({
 	queryFn: () => getUserProfileAction({ userId }),
 })
 
+// 4:46:00
 export const useInvalidateProfile = () => {
 	const queryClient = useQueryClient()
 
