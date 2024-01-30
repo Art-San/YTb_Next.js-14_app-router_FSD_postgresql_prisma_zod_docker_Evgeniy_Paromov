@@ -37,7 +37,7 @@ export function Profile() {
 
 	const user = session?.data?.user
 
-	console.log('user', user)
+	// console.log('user', user)
 
 	return (
 		<DropdownMenu>
