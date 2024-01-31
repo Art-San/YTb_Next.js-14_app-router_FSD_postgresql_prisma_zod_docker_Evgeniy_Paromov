@@ -16,4 +16,7 @@ volumes:
   db-data:
 
 
+  docker exec db-1 npx prisma migrate dev
+
+
   

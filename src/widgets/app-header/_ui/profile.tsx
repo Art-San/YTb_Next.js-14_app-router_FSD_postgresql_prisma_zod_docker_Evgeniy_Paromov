@@ -26,7 +26,7 @@ import { useRole } from '@/entities/user/_vm/use-role'
 export function Profile() {
 	const session = useAppSession()
 	const { signOut, isPending: isLoadingSignOut } = useSignOut()
-	console.log('Profile session', useRole())
+	// console.log('Profile session', useRole())
 	if (session.status === 'loading') {
 		return <Skeleton className="w-8 h-8 rounded-full" />
 	}

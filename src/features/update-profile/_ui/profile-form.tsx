@@ -17,7 +17,6 @@ import { Input } from '@/shared/ui/input'
 import { Spinner } from '@/shared/ui/spinner'
 import { AvatarField } from './avatar-field'
 import { Profile } from '@/entities/user/profile'
-
 import { UserId } from '@/entities/user/user'
 import { useUpdateProfile } from '../_vm/use-update-profile'
 
@@ -43,9 +42,9 @@ const getDefaultValues = (profile: Profile) => ({
 
 export function ProfileForm({
 	onSuccess,
+	submitText = 'Сохранить',
 	profile,
 	userId,
-	submitText = 'Сохранить',
 }: {
 	userId: UserId
 	profile: Profile

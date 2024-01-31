@@ -5,7 +5,6 @@ import { Spinner } from '@/shared/ui/spinner'
 import { ProfileAvatar } from '@/entities/user/profile'
 import { useUploadAvatar } from '../_vm/use-upload-avatar'
 
-// 5:03:20
 export function AvatarField({
 	value,
 	onChange,
@@ -13,7 +12,9 @@ export function AvatarField({
 	value?: string
 	onChange: (value?: string) => void
 }) {
-	const { handleFileSelect, isPending } = useUploadAvatar({})
+	const { handleFileSelect, isPending } = useUploadAvatar({
+		onSuccess: onChange,
+	})
 
 	return (
 		<Button
