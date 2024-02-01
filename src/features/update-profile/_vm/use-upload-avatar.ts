@@ -14,6 +14,7 @@ export const useUploadAvatar = ({
 		mutationFn: uploadAvatarAction,
 		onSuccess(data) {
 			// 5:40:00
+			console.log('data.avatar.path', data.avatar) // images/avatar-1706778239750-authprisma-adapter  Auth.js - Google Chrome.jpg
 			onSuccess?.(data.avatar.path)
 		},
 	})
@@ -27,11 +28,13 @@ export const useUploadAvatar = ({
 
 		const formData = new FormData()
 
-		formData.set(AVATAR_FILE_KEY, file)
+		formData.set('avatar', file)
+		// formData.set(AVATAR_FILE_KEY, file)
 
 		await mutateAsync(formData)
 	}
 
+	// console.log('handleFileSelect', handleFileSelect)
 	return {
 		isPending,
 		handleFileSelect,

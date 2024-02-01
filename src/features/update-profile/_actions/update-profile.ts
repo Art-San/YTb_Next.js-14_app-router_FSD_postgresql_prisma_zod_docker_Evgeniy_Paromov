@@ -1,10 +1,9 @@
 'use server'
 
 import { z } from 'zod'
-
+import { profileSchema } from '@/entities/user/profile'
 import { getAppSessionStrictServer } from '@/entities/user/session.server'
 import { updateProfileUseCase } from '@/entities/user/profile.server'
-import { profileSchema } from '@/entities/user/_domain/schema'
 
 const propsSchema = z.object({
 	userId: z.string(),
@@ -19,7 +18,6 @@ export const updateProfileAction = async (
 	props: z.infer<typeof propsSchema>
 ) => {
 	const { userId, data } = propsSchema.parse(props)
-	console.log('updateProfileAction data', data)
 
 	const session = await getAppSessionStrictServer()
 
@@ -33,3 +31,39 @@ export const updateProfileAction = async (
 		profile: user,
 	})
 }
+
+// 'use server'
+
+// import { z } from 'zod'
+
+// import { getAppSessionStrictServer } from '@/entities/user/session.server'
+// import { updateProfileUseCase } from '@/entities/user/profile.server'
+// import { profileSchema } from '@/entities/user/_domain/schema'
+
+// const propsSchema = z.object({
+// 	userId: z.string(),
+// 	data: profileSchema.partial(),
+// })
+
+// const resultSchema = z.object({
+// 	profile: profileSchema,
+// })
+
+// export const updateProfileAction = async (
+// 	props: z.infer<typeof propsSchema>
+// ) => {
+// 	const { userId, data } = propsSchema.parse(props)
+// 	console.log('updateProfileAction data', data)
+
+// 	const session = await getAppSessionStrictServer()
+
+// 	const user = await updateProfileUseCase.exec({
+// 		session,
+// 		data,
+// 		userId,
+// 	})
+
+// 	return resultSchema.parseAsync({
+// 		profile: user,
+// 	})
+// }
