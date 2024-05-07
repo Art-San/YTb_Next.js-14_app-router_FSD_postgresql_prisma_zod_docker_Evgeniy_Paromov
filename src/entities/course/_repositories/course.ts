@@ -1,16 +1,13 @@
-import { dbClient } from '@/shared/lib/db'
 import { cache } from 'react'
 import { CourseEntity } from '../_domain/types'
-import { fileFetcher } from '@/shared/api/content'
-import { privateConfig } from '@/shared/config/private'
+
+import { fetchManifest } from '@/shared/api/content'
 
 class CoursesRepository {
 	getCoursesList = cache(async (): Promise<CourseEntity[]> => {
-		const text = await fileFetcher.fetchText(
-			`${privateConfig.CONTENT_URL}/manifest.yaml`
-		)
+		const manifest = await fetchManifest()
 
-		console.log(0, text)
+		console.log(0, 'manifest', manifest)
 		return [
 			{
 				id: '1234',
