@@ -1,7 +1,7 @@
-import { FileFetcher } from "./_lib/file-fetcher";
-
-
-export const fileFetcher = new FileFetcher()
+import { privateConfig } from '@/shared/config/private'
+import { FileFetcher } from './_lib/file-fetcher'
+// 1Ж24
+export const fileFetcher = new FileFetcher(privateConfig.CONTENT_TOKEN)
 // import { join } from "path";
 // import { CacheStategy } from "./_lib/cache-strategy";
 // import { ContentParser } from "./_lib/content-parser";
