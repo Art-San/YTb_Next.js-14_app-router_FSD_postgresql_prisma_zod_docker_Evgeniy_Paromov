@@ -32,8 +32,8 @@ class CoursesRepository {
 
 		const fetchCourse = async (courseSlug: string): Promise<CourseEntity> => {
 			// console.log(5, courseSlug)
-			const course = await contentApi.fetchCourse('test-course-1')
-			// const course = await contentApi.fetchCourse(courseSlug)
+			// const course = await contentApi.fetchCourse('test-course-1')
+			const course = await contentApi.fetchCourse(courseSlug)
 			return {
 				id: course.id,
 				title: course.title,

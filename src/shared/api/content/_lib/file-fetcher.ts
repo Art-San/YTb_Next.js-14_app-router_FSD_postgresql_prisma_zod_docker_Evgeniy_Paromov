@@ -12,7 +12,7 @@ export class FileFetcher {
 					: {}),
 			},
 		}).then((res) => res.text())
-		console.log(1, res)
+		console.log(1.1, res)
 		return res
 	}
 }
