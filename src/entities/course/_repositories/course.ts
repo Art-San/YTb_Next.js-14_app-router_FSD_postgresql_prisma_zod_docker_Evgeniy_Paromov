@@ -28,11 +28,8 @@ import { contentApi } from '@/shared/api/content'
 class CoursesRepository {
 	getCoursesList = cache(async (): Promise<CourseEntity[]> => {
 		const manifest = await contentApi.fetchManifest()
-		// console.log(5, 'manifest', manifest)
 
 		const fetchCourse = async (courseSlug: string): Promise<CourseEntity> => {
-			// console.log(5, courseSlug)
-			// const course = await contentApi.fetchCourse('test-course-1')
 			const course = await contentApi.fetchCourse(courseSlug)
 			return {
 				id: course.id,
