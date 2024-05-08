@@ -28,10 +28,12 @@ import { contentApi } from '@/shared/api/content'
 class CoursesRepository {
 	getCoursesList = cache(async (): Promise<CourseEntity[]> => {
 		const manifest = await contentApi.fetchManifest()
-		// console.log(1, 'manifest,', manifest)
+		// console.log(5, 'manifest', manifest)
 
 		const fetchCourse = async (courseSlug: string): Promise<CourseEntity> => {
-			const course = await contentApi.fetchCourse(courseSlug)
+			// console.log(5, courseSlug)
+			const course = await contentApi.fetchCourse('test-course-1')
+			// const course = await contentApi.fetchCourse(courseSlug)
 			return {
 				id: course.id,
 				title: course.title,
@@ -44,8 +46,6 @@ class CoursesRepository {
 			manifest.courses.map(fetchCourse)
 		)
 
-		// console.log(2, settledCourses)
-
 		settledCourses.forEach((value, i) => {
 			if (value.status === 'rejected') {
 				// logger.error({
@@ -56,7 +56,7 @@ class CoursesRepository {
 			}
 		})
 
-		return settledCourses
+		const res = settledCourses
 			.filter(
 				(courseResult): courseResult is PromiseFulfilledResult<CourseEntity> =>
 					courseResult.status === 'fulfilled'
@@ -64,6 +64,8 @@ class CoursesRepository {
 			.map((course) => {
 				return course.value
 			})
+
+		return res
 	})
 }
 

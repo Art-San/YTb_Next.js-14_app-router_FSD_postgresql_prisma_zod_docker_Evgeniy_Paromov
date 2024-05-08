@@ -29,7 +29,7 @@ export class ContentApi {
 	async fetchManifest() {
 		const fetchData = async () => {
 			const text = await this.d.fileFetcher.fetchText(this.getManifestUrl())
-			console.log(2, 'fetchManifest', text)
+			// console.log(2, 'fetchManifest text', text)
 			return await this.d.contentParser.parse<Manifest>(text, manifestSchema)
 		}
 		return this.d.cacheStrategy.fetch(['manifest'], fetchData)
@@ -49,10 +49,9 @@ export class ContentApi {
 	// }
 
 	async fetchCourse(slug: CourseSlug) {
-		console.log(3, 'slughhmm', slug)
+		// console.log(3, 'slug 1', slug)
 		const fetchData = async () => {
 			const text = await this.d.fileFetcher.fetchText(this.getCourseUrl(slug))
-			console.log(3, 'fetchCourse', text)
 			return await this.d.contentParser.parse<Course>(text, courseSchema)
 		}
 		return this.d.cacheStrategy.fetch(['course', slug], fetchData)

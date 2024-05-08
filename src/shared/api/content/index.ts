@@ -25,10 +25,15 @@ const dummyCacheStrategy = new DummyCacheStrategy()
 // }
 
 export const contentApi = new ContentApi(privateConfig.CONTENT_URL, {
-	cacheStrategy:
-		process.env.NODE_ENV === 'development'
-			? dummyCacheStrategy
-			: reactQueryCacheStrategy,
+	cacheStrategy: dummyCacheStrategy,
 	contentParser,
 	fileFetcher,
 })
+// export const contentApi = new ContentApi(privateConfig.CONTENT_URL, {
+// 	cacheStrategy:
+// 		process.env.NODE_ENV === 'development'
+// 			? dummyCacheStrategy
+// 			: reactQueryCacheStrategy,
+// 	contentParser,
+// 	fileFetcher,
+// })
