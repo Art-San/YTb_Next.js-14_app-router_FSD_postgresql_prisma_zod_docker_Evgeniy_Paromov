@@ -1,70 +1,45 @@
-// import { cache } from 'react'
-// import { CourseEntity } from '../_domain/types'
-
-// import { contentApi } from '@/shared/api/content'
-
-// class CoursesRepository {
-// 	getCoursesList = cache(async (): Promise<CourseEntity[]> => {
-// 		const manifest = await contentApi.fetchManifest()
-
-// 		console.log(0, 'manifest', manifest)
-// 		return [
-// 			{
-// 				id: '1234',
-// 				slug: 'tup',
-// 				description: 'description',
-// 				title: 'title',
-// 			},
-// 		]
-// 	})
-// }
-
-// export const coursesRepository = new CoursesRepository()
-
-import { cache } from 'react'
-import { CourseEntity } from '../_domain/types'
-import { contentApi } from '@/shared/api/content'
-import { logger } from '@/shared/lib/logger'
+import { cache } from "react";
+import { CourseEntity } from "../_domain/types";
+import { contentApi } from "@/shared/api/content";
+import { logger } from "@/shared/lib/logger";
 class CoursesRepository {
-	getCoursesList = cache(async (): Promise<CourseEntity[]> => {
-		const manifest = await contentApi.fetchManifest()
+  getCoursesList = cache(async (): Promise<CourseEntity[]> => {
+    const manifest = await contentApi.fetchManifest();
 
-		const fetchCourse = async (courseSlug: string): Promise<CourseEntity> => {
-			const course = await contentApi.fetchCourse(courseSlug)
+    const fetchCourse = async (courseSlug: string): Promise<CourseEntity> => {
+      const course = await contentApi.fetchCourse(courseSlug);
 
-			return {
-				id: course.id,
-				title: course.title,
-				description: course.description,
-				slug: courseSlug,
-			}
-		}
+      return {
+        id: course.id,
+        title: course.title,
+        description: course.description,
+        slug: courseSlug,
+      };
+    };
 
-		const settledCourses = await Promise.allSettled(
-			manifest.courses.map(fetchCourse)
-		)
+    const setteldCourses = await Promise.allSettled(
+      manifest.courses.map(fetchCourse),
+    );
 
-		settledCourses.forEach((value, i) => {
-			if (value.status === 'rejected') {
-				logger.error({
-					msg: 'Course by slug not found',
-					slug: manifest.courses[i],
-					erorr: value.reason,
-				})
-			}
-		})
+    setteldCourses.forEach((value, i) => {
+      if (value.status === "rejected") {
+        logger.error({
+          msg: "Course by slug not found",
+          slug: manifest.courses[i],
+          erorr: value.reason,
+        });
+      }
+    });
 
-		const res = settledCourses
-			.filter(
-				(courseResult): courseResult is PromiseFulfilledResult<CourseEntity> =>
-					courseResult.status === 'fulfilled'
-			)
-			.map((course) => {
-				return course.value
-			})
-
-		return res
-	})
+    return setteldCourses
+      .filter(
+        (courseResult): courseResult is PromiseFulfilledResult<CourseEntity> =>
+          courseResult.status === "fulfilled",
+      )
+      .map((course) => {
+        return course.value;
+      });
+  });
 }
 
-export const coursesRepository = new CoursesRepository()
+export const coursesRepository = new CoursesRepository();

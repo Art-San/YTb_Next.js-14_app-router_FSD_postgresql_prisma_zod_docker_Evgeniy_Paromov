@@ -1,21 +1,19 @@
-// 4:00:00
-import { UserId } from '../_domain/types'
-import { getUserProfileAction } from '../_actions/get-user-profile'
-import { useQueryClient } from '@tanstack/react-query'
+import { UserId } from "@/kernel/domain/user";
+import { getUserProfileAction } from "../_actions/get-user-profile";
+import { useQueryClient } from "@tanstack/react-query";
 
-const baseKey = 'user'
+const baseKey = "user";
 
 export const getProfileQuery = (userId: UserId) => ({
-	queryKey: [baseKey, 'getProfileById', userId],
-	queryFn: () => getUserProfileAction({ userId }),
-})
+  queryKey: [baseKey, "getProfileById", userId],
+  queryFn: () => getUserProfileAction({ userId }),
+});
 
-// 4:46:00
 export const useInvalidateProfile = () => {
-	const queryClient = useQueryClient()
+  const queryClient = useQueryClient();
 
-	return (userId: UserId) =>
-		queryClient.invalidateQueries({
-			queryKey: [baseKey, 'getProfileById', userId],
-		})
-}
+  return (userId: UserId) =>
+    queryClient.invalidateQueries({
+      queryKey: [baseKey, "getProfileById", userId],
+    });
+};

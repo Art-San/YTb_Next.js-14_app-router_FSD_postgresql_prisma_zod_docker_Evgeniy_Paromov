@@ -1,1 +1,1 @@
-export { getCoursesListService } from './_service/get-courses-list'
+export { getCoursesListService } from "./_services/get-courses-list";

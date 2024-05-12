@@ -5,24 +5,24 @@
  * and run json-schema-to-typescript to regenerate this file.
  */
 
-export type Cuid = string
+export type Cuid = string;
 export type Product =
-	| {
-			access: 'free'
-	  }
-	| {
-			access: 'paid'
-			price: number
-	  }
+  | {
+      access: "free";
+    }
+  | {
+      access: "paid";
+      price: number;
+    };
 
 export interface Course {
-	id: Cuid
-	title: string
-	description: string
-	shortDescription?: string
-	thumbnail: string
-	image: string
-	dependencies?: Cuid[]
-	lessons: Cuid[]
-	product: Product
+  id: Cuid;
+  title: string;
+  description: string;
+  shortDescription?: string;
+  thumbnail: string;
+  image: string;
+  dependencies?: Cuid[];
+  lessons: Cuid[];
+  product: Product;
 }

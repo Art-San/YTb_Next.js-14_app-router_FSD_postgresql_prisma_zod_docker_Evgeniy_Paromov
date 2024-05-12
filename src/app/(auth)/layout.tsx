@@ -1,14 +1,14 @@
-import { AppHeader } from '../_widgets/app-header/app-header'
+import { AppHeader } from "../_widgets/app-header/app-header";
 
 export default async function Layout({
-	children,
+  children,
 }: {
-	children: React.ReactNode
+  children: React.ReactNode;
 }) {
-	return (
-		<>
-			<AppHeader variant="auth" />
-			{children}
-		</>
-	)
+  return (
+    <>
+      <AppHeader variant="auth" />
+      {children}
+    </>
+  );
 }

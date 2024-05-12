@@ -1,7 +1,3 @@
-import { FC } from 'react'
-
-const MapPage: FC = () => {
-	return <div>MapPage</div>
+export default function Map() {
+  return <div className="container py-10">Map</div>;
 }
-
-export default MapPage
