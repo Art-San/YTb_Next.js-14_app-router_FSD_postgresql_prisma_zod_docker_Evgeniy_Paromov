@@ -7,7 +7,7 @@ import { dbClient } from '@/shared/lib/db'
 import { compact } from 'lodash-es'
 import { privateConfig } from '@/shared/config/private'
 import { createUserService } from './_service/create-user'
-
+// 16:00
 const prismaAdapter = PrismaAdapter(dbClient)
 
 const emailToken = privateConfig.TEST_EMAIL_TOKEN

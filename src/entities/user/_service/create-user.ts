@@ -1,7 +1,8 @@
-import { ROLES, UserEntity } from '../_domain/types'
+// import { ROLES, UserEntity } from '../_domain/types'
 import { createId } from '@/shared/lib/id'
 import { userRepository } from '../_repositories/user'
 import { privateConfig } from '@/shared/config/private'
+import { ROLES, SharedUser } from '@/kernel/domain/user'
 
 type CreateUser = {
 	email: string
@@ -16,7 +17,7 @@ export class CreateUserService {
 		console.log('privateConfig.ADMINS_EMAILS', adminEmails)
 		const role = adminEmails.includes(data.email) ? ROLES.ADMIN : ROLES.USER
 
-		const user: UserEntity = {
+		const user: SharedUser = {
 			id: createId(),
 			role,
 			...data,

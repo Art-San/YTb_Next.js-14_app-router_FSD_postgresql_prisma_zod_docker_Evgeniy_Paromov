@@ -1,15 +1,16 @@
 import { AuthorizatoinError } from '@/shared/lib/errors'
-import { Profile, SessionEntity, UserEntity, UserId } from '../_domain/types'
+
 import { createUserAbility } from '../_domain/ability'
 import { userRepository } from '../_repositories/user'
+import { SharedSession, SharedUser, UserId } from '@/kernel/domain/user'
 
 type GetUser = {
 	userId: UserId
-	session: SessionEntity
+	session: SharedSession
 }
 
 export class GetUserService {
-	async exec({ userId, session }: GetUser): Promise<UserEntity> {
+	async exec({ userId, session }: GetUser): Promise<SharedUser> {
 		const userAbility = createUserAbility(session)
 
 		if (!userAbility.canGetUser(userId)) {
