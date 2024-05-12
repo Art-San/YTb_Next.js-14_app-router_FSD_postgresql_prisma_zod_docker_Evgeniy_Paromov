@@ -52,6 +52,7 @@ export class ContentApi {
 	})
 	private async fetchCourseQuery(slug: string) {
 		const text = await this.d.fileFetcher.fetchText(this.getCourseUrl(slug))
+		console.log(20, 'text', text)
 		return await this.d.contentParser.parse<Course>(text, courseSchema)
 	}
 

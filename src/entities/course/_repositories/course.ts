@@ -31,6 +31,7 @@ class CoursesRepository {
 
 		const fetchCourse = async (courseSlug: string): Promise<CourseEntity> => {
 			const course = await contentApi.fetchCourse(courseSlug)
+
 			return {
 				id: course.id,
 				title: course.title,
